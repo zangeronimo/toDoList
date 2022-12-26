@@ -23,15 +23,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
 
-  finishButtonLabel: {
-    color: '#4EA8DE',
-    width: 24,
-    height: 24,
-    borderWidth: 1,
-    borderColor: '#4EA8DE',
-    borderRadius: 12,
-  },
-
   contentText: {
     color: '#F2F2F2',
     fontSize: 14,
@@ -46,5 +37,10 @@ export default StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  removeButtonLabel: {
+    fontSize: 24,
+    color: '#808080',
   },
 });

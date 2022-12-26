@@ -28,6 +28,19 @@ const App = () => {
     setState(old => ({...old, todos: [...old.todos, todo]}));
   };
 
+  const togglePending = (todo: Todo) => {
+    setState(old => ({
+      ...old,
+      todos: old.todos.map(item => {
+        if (item.id === todo.id) {
+          item.pending = !item.pending;
+        }
+
+        return item;
+      }),
+    }));
+  };
+
   return (
     <View style={styles.container}>
       <Header />
@@ -63,7 +76,9 @@ const App = () => {
       <FlatList
         data={state.todos}
         keyExtractor={item => item.id}
-        renderItem={({item}) => <TodoList todo={item} />}
+        renderItem={({item}) => (
+          <TodoList todo={item} togglePending={togglePending} />
+        )}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => <EmptyList />}
       />
