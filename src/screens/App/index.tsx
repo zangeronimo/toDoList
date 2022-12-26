@@ -15,7 +15,7 @@ export type Todo = {
 const App = () => {
   const [state, setState] = useState({
     todos: [] as Todo[],
-    todo: 'test',
+    todo: '',
   });
 
   const handleAddNewTodo = () => {
@@ -25,7 +25,7 @@ const App = () => {
       pending: true,
     } as Todo;
 
-    setState(old => ({...old, todos: [...old.todos, todo]}));
+    setState(old => ({...old, todos: [...old.todos, todo], todo: ''}));
   };
 
   const togglePending = (todo: Todo) => {
@@ -38,6 +38,13 @@ const App = () => {
 
         return item;
       }),
+    }));
+  };
+
+  const removeTodo = (todo: Todo) => {
+    setState(old => ({
+      ...old,
+      todos: old.todos.filter(item => item.id !== todo.id),
     }));
   };
 
@@ -77,7 +84,11 @@ const App = () => {
         data={state.todos}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <TodoList todo={item} togglePending={togglePending} />
+          <TodoList
+            todo={item}
+            togglePending={togglePending}
+            removeTodo={removeTodo}
+          />
         )}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => <EmptyList />}

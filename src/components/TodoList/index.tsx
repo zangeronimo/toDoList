@@ -9,15 +9,24 @@ import styles from './TodoList';
 type Props = {
   todo?: Todo;
   togglePending: (todo: Todo) => void;
+  removeTodo: (todo: Todo) => void;
 };
 
-export const TodoList = ({todo = undefined, togglePending}: Props) => {
+export const TodoList = ({
+  todo = undefined,
+  togglePending,
+  removeTodo,
+}: Props) => {
   if (!todo) {
     return <></>;
   }
 
   const handleTogglePending = () => {
     togglePending(todo);
+  };
+
+  const handleRemoveTodo = () => {
+    removeTodo(todo);
   };
 
   return (
@@ -28,9 +37,9 @@ export const TodoList = ({todo = undefined, togglePending}: Props) => {
         {todo.pending ? <PendingLabel /> : <DoneLabel />}
       </TouchableOpacity>
       <Text style={styles.contentText}>{todo.content}</Text>
-      <View style={styles.removeButton}>
+      <TouchableOpacity style={styles.removeButton} onPress={handleRemoveTodo}>
         <Text style={styles.removeButtonLabel}>-</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
